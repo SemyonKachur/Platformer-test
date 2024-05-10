@@ -12,13 +12,14 @@ namespace GameFlow.Conditions
         {
             _collider = GetComponent<Collider>();
             _collider.isTrigger = true;
+            IsCompete = true;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<Player>(out Player player))
             {
-                IsCompete = true;
+                IsCompete = false;
             }
         }
     }
