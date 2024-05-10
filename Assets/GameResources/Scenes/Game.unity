@@ -1082,6 +1082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1710101231}
+  - component: {fileID: 1710101233}
   - component: {fileID: 1710101232}
   m_Layer: 0
   m_Name: VirtualCamera
@@ -1159,6 +1160,20 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   m_ComponentOwner: {fileID: 2066144688}
+--- !u!114 &1710101233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710101230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e7b6923aaf9e3540ae6fce007772d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerContainer: {fileID: 11400000, guid: b71aec06ea8306d499273afb8593d698, type: 2}
+  _virtualCamera: {fileID: 1710101232}
 --- !u!1 &1818445045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowOffset: {x: 0, y: 0, z: -17}
+  FollowOffset: {x: 0, y: 0, z: -20}
   TrackerSettings:
     BindingMode: 4
     PositionDamping: {x: 1, y: 1, z: 1}
