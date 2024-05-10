@@ -6,7 +6,7 @@
     using UnityEngine.InputSystem;
 
     [RequireComponent(typeof(Rigidbody))]
-    public class ShootingMovement : MonoBehaviour, IMovable
+    public class SwipeMovement : MonoBehaviour, IMovable
     {
         public event Action onStartMove = delegate { };
         public event Action onEndMove = delegate { };
@@ -63,7 +63,13 @@
             onEndMove();
         }
 
-        public void Move() => _rigidbody.AddForce(Direction, _forceMode);
+        public void Move()
+        {
+            _rigidbody.angularVelocity = Vector3.zero;
+            _rigidbody.linearVelocity = Vector3.zero;
+            
+            _rigidbody.AddForce(Direction, _forceMode);
+        } 
 
         private void OnDisable()
         {
