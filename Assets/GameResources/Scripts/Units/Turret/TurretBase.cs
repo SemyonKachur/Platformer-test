@@ -39,7 +39,7 @@
         [SerializeField]
         protected List<AbstractAiState> aiStates = new List<AbstractAiState>();
         [SerializeField, Min(0)]
-        protected int defaultFirstState = 0;
+        protected int defaultState = 0;
 
         [SerializeField]
         protected AttackModule attackModule = default;
@@ -57,7 +57,7 @@
 
         public virtual void Attack(bool isAttack) => attackModule.Attack(isAttack);
 
-        protected virtual void Awake()
+        protected virtual void OnEnable()
         {
             InitStats();
             InitAI();
@@ -70,19 +70,21 @@
             foreach (AbstractAiState aiState in aiStates)
             {
                 aiState.Init(this);
+                aiState.onStateComplete += SetDefaultState;
             }
-            
-            activeState = aiStates[defaultFirstState];
-            activeState.Enter();
+
+            SetDefaultState();
         }
+
+        protected virtual void SetDefaultState() => UpdateState(aiStates[defaultState]);
 
         protected virtual void OnValidate()
         {
             if (isActiveAndEnabled)
             {
-                if (defaultFirstState >= aiStates.Count && defaultFirstState != 0)
+                if (defaultState >= aiStates.Count && defaultState != 0)
                 {
-                    defaultFirstState = aiStates.Count - 1;
+                    defaultState = aiStates.Count - 1;
                 }
             }
         }
@@ -90,6 +92,12 @@
         protected virtual void OnDisable()
         {
             activeState.Exit();
+            
+            foreach (AbstractAiState aiState in aiStates)
+            {
+                aiState.onStateComplete -= SetDefaultState;
+            }
+            
             Attack(false);
         } 
     }

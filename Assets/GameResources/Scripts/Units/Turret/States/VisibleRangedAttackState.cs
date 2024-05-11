@@ -1,6 +1,7 @@
 namespace Units.Turret.States
 {
     using System.Collections;
+    using DG.Tweening;
     using Units.Player;
     using UnityEngine;
 
@@ -16,14 +17,17 @@ namespace Units.Turret.States
 
         [SerializeField]
         private Vector3 _offest = new Vector3(0,0,2);
-        [SerializeField, Range(0,1)]
-        private float _delayTime = 0.05f;
+        [SerializeField, Range(0,10)]
+        private float _speed = 4;
 
         private Transform _target = default;
         private Coroutine _coroutine = default;
+        private Tweener _tweener = default;
         
         private Ray _ray = default;
         private RaycastHit _info = default;
+        private Vector3 _position = default;
+        private Quaternion _targetRotation = default;
 
         public override void Enter()
         {
@@ -33,11 +37,14 @@ namespace Units.Turret.States
 
         private IEnumerator LookAtTarget()
         {
-            while (isActive)
+            while (isActive && _target != null)
             {
-                turret.transform.LookAt(_target);
+                _position = _target.position - turret.transform.position;
+                _targetRotation = Quaternion.LookRotation(_position);
+                turret.transform.rotation = Quaternion.Lerp(turret.transform.rotation, _targetRotation, Time.deltaTime * _speed);
+                
                 CheckPlayerVisible();
-                yield return new WaitForSeconds(_delayTime);
+                yield return null;
             }
         }
 
@@ -84,7 +91,6 @@ namespace Units.Turret.States
         {
             if (other.TryGetComponent<Player>(out Player player))
             {
-                turret.UpdateState(this);
                 _target = null;
                 OnStateCompleteHandler();
             }

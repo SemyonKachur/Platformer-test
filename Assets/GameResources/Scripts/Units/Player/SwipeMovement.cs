@@ -65,10 +65,12 @@
 
         public void Move()
         {
-            _rigidbody.angularVelocity = Vector3.zero;
-            _rigidbody.linearVelocity = Vector3.zero;
-            
-            _rigidbody.AddForce(Direction, _forceMode);
+            if (_direction != Vector2.zero)
+            {
+                _rigidbody.angularVelocity = Vector3.zero;
+                _rigidbody.linearVelocity = Vector3.zero;
+                _rigidbody.AddForce(Direction, _forceMode);
+            }
         } 
 
         private void OnDisable()
