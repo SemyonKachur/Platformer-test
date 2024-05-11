@@ -3,7 +3,7 @@
     using System.Collections;
     using UnityEngine;
 
-    public sealed class BulletAttack : AttackModule
+    public sealed class BulletGun : AttackModule
     {
         [SerializeField]
         private Transform _spawnPoint = default;
@@ -16,7 +16,6 @@
         private float _lastShootTime = default;
         private Coroutine _coroutine = default;
         
-
         public override void Attack(bool isAttack)
         {
             if (isAttack == IsAttack)
