@@ -50,7 +50,8 @@ namespace Units.Turret.States
 
         private void CheckPlayerVisible()
         {
-            _ray = new Ray(turret.transform.position + _offest, turret.transform.forward);
+            var direction = _target.position - turret.transform.position;
+            _ray = new Ray(turret.transform.position + _offest, direction);
             if (Physics.Raycast(_ray, out RaycastHit _info, _attackRange * _rangeMultiplier))
             {
                 if (_info.collider.TryGetComponent<Player>(out Player player))

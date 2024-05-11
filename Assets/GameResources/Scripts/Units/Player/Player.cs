@@ -2,6 +2,7 @@ namespace Units.Player
 {
     using System;
     using Units.Abstractions;
+    using Units.Turret;
     using UnityEngine;
     
     public class Player : MonoBehaviour, IHealthHolder
@@ -23,6 +24,9 @@ namespace Units.Player
         protected float health = default;
 
         public float MaxHealth => maxHealth;
+
+        public void TakeDamage(IDamageble damage) => Health -= damage.DamageValue;
+
         [SerializeField, Range(0,100)]
         protected float maxHealth = 100;
 

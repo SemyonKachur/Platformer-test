@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3276158393692005958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4060061431762149472}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4060061431762149472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276158393692005958}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.58}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1534777378175724896}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4024900330778570504
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,6 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Attack
   _attackRange: 6.5
+  _rangeMultiplier: 2
+  _offest: {x: 0, y: 0, z: 0.5}
+  _speed: 4
 --- !u!1 &7806902909565260618
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,6 +113,7 @@ GameObject:
   - component: {fileID: 1534777378175724896}
   - component: {fileID: 178172297357917764}
   - component: {fileID: 6743972789274169978}
+  - component: {fileID: 8604581065383786368}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -98,7 +133,8 @@ Transform:
   m_LocalPosition: {x: -0, y: -0, z: 0.555}
   m_LocalScale: {x: 0.1, y: 0.05, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4060061431762149472}
   m_Father: {fileID: 2108001609235971085}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &178172297357917764
@@ -154,6 +190,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8604581065383786368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7806902909565260618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8881c9490a4139b6e701ad6331a6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPoint: {fileID: 4060061431762149472}
+  _delayTime: 0.5
+  _bullet: {fileID: 389715850182312907, guid: 716d220621ded4e41bb307703e5aa802, type: 3}
 --- !u!1 &8196361918609822429
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,8 +334,8 @@ MonoBehaviour:
   aiStates:
   - {fileID: 5496954089409460322}
   - {fileID: 1498735851147490674}
-  defaultFirstState: 0
-  attackModule: {fileID: 0}
+  defaultState: 0
+  attackModule: {fileID: 8604581065383786368}
 --- !u!114 &5496954089409460322
 MonoBehaviour:
   m_ObjectHideFlags: 0

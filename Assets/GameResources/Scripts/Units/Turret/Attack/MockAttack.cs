@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class DebugAttack : AttackModule
+    public sealed class MockAttack : AttackModule
     {
         public override void Attack(bool isAttack)
         {
