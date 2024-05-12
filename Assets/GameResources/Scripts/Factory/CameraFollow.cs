@@ -10,7 +10,7 @@ namespace Factory
 
         protected override void DoAction()
         {
-            base.DoAction();
+            player = _playerContainer.Player;
             _virtualCamera.Follow = player.transform;
         } 
     }

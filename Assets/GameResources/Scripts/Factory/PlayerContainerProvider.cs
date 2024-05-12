@@ -3,7 +3,7 @@ namespace Factory
     using Units.Player;
     using UnityEngine;
 
-    public class PlayerContainerProvider : MonoBehaviour
+    public abstract class PlayerContainerProvider : MonoBehaviour
     {
         [SerializeField]
         protected PlayerContainerInstance _playerContainer = default;
@@ -22,7 +22,7 @@ namespace Factory
             }
         }
 
-        protected virtual void DoAction() => player = _playerContainer.Player;
+        protected abstract void DoAction(); 
 
         protected virtual void OnDisable() => _playerContainer.onPlayerInit -= DoAction;
     }

@@ -19,7 +19,7 @@ namespace Units.Player.View
 
         protected override void DoAction()
         {
-            base.DoAction();
+            player = _playerContainer.Player;
             _movable = player.GetComponent<IMovable>();
             if (_movable != null)
             {
