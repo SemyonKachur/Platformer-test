@@ -11,11 +11,11 @@ namespace GameFlow.Conditions
         private void OnEnable()
         {
             _playerInput.action.Enable();
-            _playerInput.action.performed += SetCondition;
+            _playerInput.action.canceled += SetCondition;
         }
 
-        private void SetCondition(InputAction.CallbackContext obj) => IsCompete = true;
+        private void SetCondition(InputAction.CallbackContext obj) => IsComplete = true;
 
-        private void OnDisable() => _playerInput.action.performed -= SetCondition;
+        private void OnDisable() => _playerInput.action.canceled -= SetCondition;
     }
 }

@@ -2,8 +2,8 @@ namespace GameFlow.Conditions
 {
     public class PauseCondition : AbstractCondition
     {
-        private void Awake() => IsCompete = true;
+        private void Awake() => IsComplete = true;
 
-        public void SetPause(bool isPause) => IsCompete = !isPause;
+        public void SetPause(bool isPause) => IsComplete = !isPause;
     }
 }

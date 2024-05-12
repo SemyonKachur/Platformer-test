@@ -2,11 +2,14 @@ namespace Units.Player.View
 {
     using System.Collections;
     using Factory;
+    using GameFlow;
     using Units.Abstractions;
     using UnityEngine;
 
     public class SwipeView : PlayerContainerProvider
     {
+        [SerializeField]
+        private AbstractGameState _gameState = default;
         [SerializeField,Range(0,1000)]
         private int _directionDevider = 500;
         [SerializeField,Range(-10,10)]
@@ -16,6 +19,7 @@ namespace Units.Player.View
         private Coroutine _coroutine = default;
 
         private bool _isTargeting = default;
+        private bool _isPlaying = default;
 
         protected override void DoAction()
         {
@@ -26,7 +30,11 @@ namespace Units.Player.View
                 _movable.onStartMove += ShowView;
                 _movable.onEndMove += SkipView;
             }
+
+            _gameState.onStateValueChanged += UpdateState;
         }
+
+        private void UpdateState() => _isPlaying = _gameState.IsActive;
 
         private void SkipView()
         {
@@ -48,7 +56,7 @@ namespace Units.Player.View
         private IEnumerator SetDirection()
         {
             _isTargeting = true;
-            while (isActiveAndEnabled && _isTargeting)
+            while (isActiveAndEnabled && _isTargeting && _isPlaying)
             {
                 transform.position = new Vector3(
                     player.transform.position.x + _movable.Direction.x/_directionDevider, 
@@ -69,6 +77,7 @@ namespace Units.Player.View
                 _movable.onStartMove -= ShowView;
                 _movable.onEndMove -= SkipView;
             }
+            _gameState.onStateValueChanged -= UpdateState;
         } 
     }
 }

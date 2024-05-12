@@ -55,7 +55,7 @@ namespace GameFlow
         {
             foreach (AbstractCondition condition in conditions)
             {
-                if (!condition.IsCompete)
+                if (!condition.IsComplete)
                 {
                     return false;
                 }

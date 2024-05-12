@@ -132,5 +132,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 2050224398419912147}
-  _delayTime: 0.5
+  _delayTime: 0.2
   _bullet: {fileID: 389715850182312907, guid: 716d220621ded4e41bb307703e5aa802, type: 3}

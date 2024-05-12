@@ -14,7 +14,7 @@ namespace GameFlow.Conditions
 
         private void OnEnable()
         {
-            IsCompete = true;
+            IsComplete = true;
             if (_playerContainer.Player != null)
             {
                 Subscribe();
@@ -36,7 +36,7 @@ namespace GameFlow.Conditions
             _player.onHealthChanged += UpdateConditionValue;
         }
 
-        private void UpdateConditionValue() => IsCompete = _player.Health > 0;
+        private void UpdateConditionValue() => IsComplete = _player.Health > 0;
 
         private void OnDisable()
         {

@@ -7,7 +7,7 @@
     {
         public event Action onValueChanged = delegate { };
 
-        public bool IsCompete
+        public bool IsComplete
         {
             get => isComplete;
             protected set

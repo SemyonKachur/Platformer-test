@@ -28,13 +28,13 @@ namespace GameFlow.Conditions
             }
         }
 
-        protected virtual void TryToComplete() => IsCompete = IsConditionsComplete();
+        protected virtual void TryToComplete() => IsComplete = IsConditionsComplete();
         
         protected virtual bool IsConditionsComplete()
         {
             foreach (AbstractCondition condition in _endGameConditions)
             {
-                if (!condition.IsCompete)
+                if (!condition.IsComplete)
                 {
                     return false;
                 }
