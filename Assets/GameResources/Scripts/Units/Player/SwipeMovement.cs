@@ -45,22 +45,30 @@
         private void StartMove(InputAction.CallbackContext context)
         {
             _startPosition = _currentPosition;
+            _position.action.performed += UpdateDirection;
             onStartMove();
         }
-        
+
+        private void UpdateDirection(InputAction.CallbackContext context) => CalculateDirection();
+
         private void DetectSwipe(InputAction.CallbackContext context)
+        {
+            _position.action.performed -= UpdateDirection;
+            CalculateDirection();
+            Move();
+            onEndMove();
+        }
+
+        private void CalculateDirection()
         {
             _delta = _currentPosition - _startPosition;
             _direction = Vector2.zero;
-            
-            if(Mathf.Abs(_delta.x) > _swipeTrashHold)
+
+            if (Mathf.Abs(_delta.x) > _swipeTrashHold)
                 _direction.x = Mathf.Clamp(_delta.x, -_maxMovePower, _maxMovePower);
 
             if (Mathf.Abs(_delta.y) > _swipeTrashHold)
                 _direction.y = Mathf.Clamp(_delta.y, -_maxMovePower, _maxMovePower);
-
-            Move();
-            onEndMove();
         }
 
         public void Move()
@@ -76,6 +84,8 @@
         private void OnDisable()
         {
             _aim.action.Disable();
+            _aim.action.performed -= UpdateDirection;
+            
             _position.action.Disable();
             _aim.action.performed -= StartMove;
             _aim.action.canceled -= DetectSwipe;
